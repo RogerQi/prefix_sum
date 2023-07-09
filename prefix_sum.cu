@@ -496,10 +496,11 @@ int nextPowerOfTwo(int x) {
 }
 
 
-// from https://stackoverflow.com/a/36095407
-// Get the current time in nanoseconds
 long get_nanos() {
-	struct timespec ts;
-	timespec_get(&ts, TIME_UTC);
-	return (long)ts.tv_sec * 1000000000L + ts.tv_nsec;
+    struct timespec currentTime;
+    clock_gettime(CLOCK_REALTIME, &currentTime);
+
+    long nanos = currentTime.tv_sec * 1000000000L + currentTime.tv_nsec;
+
+    return nanos;
 }
